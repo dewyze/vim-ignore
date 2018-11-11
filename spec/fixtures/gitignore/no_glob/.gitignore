@@ -1,0 +1,7 @@
+node_modules/
+
+cache/test/
+foo.txt
+tmp/bar.txt
+
+# This is my comment

@@ -1,4 +1,4 @@
-function! ignore#sources#gitignore#parse_file(lines) abort
+function! ignore#sources#gitignore#ignore_map(lines) abort
   let l:dirs = []
   let l:files = []
   let l:comments = []

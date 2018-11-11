@@ -1,10 +1,12 @@
-describe 'gitignore'
-  before
-    new
-  end
-
-  after
-    close!
+describe 'sources - gitignore'
+  describe "ignore#sources#gitignore#ignore_map"
+    it "works"
+      let lines = ["dir/", "file.txt", "# comment", "   "]
+      let ignore_map = ignore#sources#gitignore#ignore_map(lines)
+      Expect keys(ignore_map) == ["dirs", "files"]
+      Expect ignore_map["dirs"] == ["dir/"]
+      Expect ignore_map["files"] == ["file.txt"]
+    end
   end
 
   describe "ignore#sources#gitignore#blank"
