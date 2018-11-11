@@ -1,0 +1,7 @@
+.vim-flavor/
+/doc/tags
+.ruby-gemset
+.ruby-version
+Gemfile
+Gemfile.lock
+Flavorfile.lock
