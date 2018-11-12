@@ -3,8 +3,6 @@ function! ignore#sources#gitignore#ignore_map(lines) abort
   let l:files = []
   let l:comments = []
   let l:blanks = []
-  " TODO: let l:globs = []
-  " TODO: let l:negations = []
 
   for l:line in a:lines
     if ignore#sources#gitignore#blank(l:line) || ignore#sources#gitignore#comment(l:line)

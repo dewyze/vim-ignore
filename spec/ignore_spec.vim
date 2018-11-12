@@ -1,5 +1,3 @@
-source "sources/gitignore_spec.vim"
-
 describe "ignore.vim"
   describe "ignore#parse"
     context ".gitignore file"

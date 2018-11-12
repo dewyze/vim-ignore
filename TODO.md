@@ -1,0 +1,9 @@
+- Be sure to not match partils like "my_builders" for "_build"
+- Default ignore folders (.git)
+- Handle filenames with characters in them:
+  - Forward slashes
+  - Backward slashes
+  - Periods
+  - Non glob stars
+- Handle files with globs
+- Handle gitignore negations
