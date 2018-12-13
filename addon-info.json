@@ -1,0 +1,5 @@
+{
+  "name": "vim-ignore",
+  "description": "Tool for turning .gitignore into a usable string for various other plugins such as fzf or nerdtree",
+  "author": "dewyze"
+}
