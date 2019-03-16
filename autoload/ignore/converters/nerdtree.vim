@@ -1,18 +1,14 @@
-function! ignore#converters#nerdtree#ignore_string(map) abort
-  let l:result = ""
+function! ignore#converters#nerdtree#ignore_array(map) abort
+  let l:result = []
   for dir in a:map["dirs"]
-    let l:result = l:result . '|' . ignore#converters#nerdtree#escape_directory(dir)
+    let l:result = l:result + [ignore#converters#nerdtree#escape(dir)]
   endfor
   for file in a:map["files"]
-    let l:result = l:result . '|' . ignore#converters#nerdtree#escape_file(file)
+    let l:result = l:result + [ignore#converters#nerdtree#escape(file)]
   endfor
-  return l:result[1:]
+  return '\%(' . join(l:result, '\|') . '\)'
 endfunction
 
-function! ignore#converters#nerdtree#escape_directory(item) abort
-  return escape(substitute(a:item, '\%(\/$\)', '[[dir]]', ''), '.')
-endfunction
-
-function! ignore#converters#nerdtree#escape_file(item) abort
-  return escape(substitute(a:item, '\%($\)', '[[file]]', ''), '.')
+function! ignore#converters#nerdtree#escape(item) abort
+  return '^' . escape(a:item, './')
 endfunction

@@ -63,7 +63,7 @@ describe "ignore#sources#gitignore#file"
     Expect ignore#sources#gitignore#file("foo.txt") toBeTrue
   end
 
-  it "returns false for non non-glob files"
+  it "returns false for glob files"
     Expect ignore#sources#gitignore#file("*foo.txt") toBeFalse
     Expect ignore#sources#gitignore#file("foo/*/bar.txt") toBeFalse
     Expect ignore#sources#gitignore#file("foo/") toBeFalse

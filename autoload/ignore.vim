@@ -1,5 +1,6 @@
 function! ignore#activate() abort
-  return ignore#parse()
+  let g:vimignore_ignore_map = ignore#parse()
+  call ignore#plugins#nerdtree#activate()
 endfunction
 
 function! ignore#parse() abort
