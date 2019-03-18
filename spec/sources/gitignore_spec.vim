@@ -69,3 +69,85 @@ describe "ignore#sources#gitignore#file"
     Expect ignore#sources#gitignore#file("foo/") toBeFalse
   end
 end
+
+describe "ignore#sources#gitignore#exact_filename"
+  " TODO: assert that this hits before exact_filepath
+
+  it 'returns true for exact filename'
+    Expect ignore#sources#gitignore#exact_filename("foo") toBeTrue
+    Expect ignore#sources#gitignore#exact_filename("foo.txt") toBeTrue
+  end
+
+  it "returns false for glob files"
+    Expect ignore#sources#gitignore#exact_filename("*foo.txt") toBeFalse
+    Expect ignore#sources#gitignore#exact_filename("foo.txt*") toBeFalse
+    Expect ignore#sources#gitignore#exact_filename("foo*txt") toBeFalse
+    Expect ignore#sources#gitignore#exact_filename("foo*/txt") toBeFalse
+  end
+
+  it "returns false for directories"
+    Expect ignore#sources#gitignore#exact_filename("/foo.txt") toBeFalse
+    Expect ignore#sources#gitignore#exact_filename("foo.txt/") toBeFalse
+    Expect ignore#sources#gitignore#exact_filename("foo/txt") toBeFalse
+  end
+end
+
+describe "ignore#sources#gitignore#exact_filepath"
+  it 'returns true for exact filepath'
+    Expect ignore#sources#gitignore#exact_filepath("foo") toBeTrue
+    Expect ignore#sources#gitignore#exact_filepath("foo.txt") toBeTrue
+  end
+
+  it "returns false for glob files"
+    Expect ignore#sources#gitignore#exact_filepath("*foo.txt") toBeFalse
+    Expect ignore#sources#gitignore#exact_filepath("foo.txt*") toBeFalse
+    Expect ignore#sources#gitignore#exact_filepath("foo*txt") toBeFalse
+    Expect ignore#sources#gitignore#exact_filepath("foo*/txt") toBeFalse
+  end
+
+  it "returns true for paths within directories"
+    Expect ignore#sources#gitignore#exact_filepath("/foo.txt") toBeTrue
+    Expect ignore#sources#gitignore#exact_filepath("foo.txt/") toBeTrue
+    Expect ignore#sources#gitignore#exact_filepath("foo/txt") toBeTrue
+  end
+end
+
+describe "ignore#sources#gitignore#exact_directory"
+  it 'returns false for exact files'
+    Expect ignore#sources#gitignore#exact_directory("foo") toBeFalse
+    Expect ignore#sources#gitignore#exact_directory("foo.txt") toBeFalse
+  end
+
+  it "returns false for globs"
+    Expect ignore#sources#gitignore#exact_directory("*foo.txt/") toBeFalse
+    Expect ignore#sources#gitignore#exact_directory("foo.txt*/") toBeFalse
+    Expect ignore#sources#gitignore#exact_directory("foo*/txt/") toBeFalse
+  end
+
+  it "returns true for directories"
+    Expect ignore#sources#gitignore#exact_directory("/foo.txt/") toBeTrue
+    Expect ignore#sources#gitignore#exact_directory("foo.txt/") toBeTrue
+    Expect ignore#sources#gitignore#exact_directory("foo/txt/") toBeTrue
+  end
+end
+
+describe "ignore#sources#gitignore#wildcard_path"
+  it 'returns false for exact filepaths'
+    Expect ignore#sources#gitignore#wildcard_path("foo") toBeFalse
+    Expect ignore#sources#gitignore#wildcard_path("foo.txt") toBeFalse
+    Expect ignore#sources#gitignore#wildcard_path("foo/") toBeFalse
+    Expect ignore#sources#gitignore#wildcard_path("foo/txt") toBeFalse
+  end
+
+  it "returns true for globs"
+    Expect ignore#sources#gitignore#wildcard_path("*foo.txt/") toBeFalse
+    Expect ignore#sources#gitignore#wildcard_path("foo.txt*/") toBeFalse
+    Expect ignore#sources#gitignore#wildcard_path("foo*/txt/") toBeFalse
+  end
+
+  it "returns false for double wildcards"
+    Expect ignore#sources#gitignore#wildcard_path("**/foo.txt") toBeTrue
+    Expect ignore#sources#gitignore#wildcard_path("foo/**/txt") toBeTrue
+    Expect ignore#sources#gitignore#wildcard_path("foo/**") toBeTrue
+  end
+end
